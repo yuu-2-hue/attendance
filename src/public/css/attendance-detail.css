@@ -1,0 +1,41 @@
+.attendance-detail__container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.attendance-detail__ttl {
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-left: 10px solid rgba(0, 0, 0, 1);
+    padding: 2px 20px;
+}
+
+.detail__table {
+    table-layout: fixed;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    margin: 30px auto;
+}
+.table__item {
+    text-align: left;
+    border-bottom: 2px solid rgba(225, 225, 225, 1);
+}
+.table__item:last-child {
+    border-bottom: none;
+}
+
+.name__ttl, .date__ttl, .work__ttl, .rest__ttl, .remarks__ttl {
+    width: 40%;
+    padding-block: 25px;
+    padding-left: 100px;
+}
+.name, .date, .work-time, .rest-time, .remarks {
+    padding-block: 25px;
+    padding-right: 100px;
+}
+.remarks textarea{
+    width: 316px;
+    height: 72px;
+    padding: 5px;
+}

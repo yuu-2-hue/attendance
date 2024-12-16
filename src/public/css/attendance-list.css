@@ -1,0 +1,58 @@
+.attendance-list__container{
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.attendance-list__ttl{
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-left: 10px solid rgba(0, 0, 0, 1);
+    padding: 2px 20px;
+}
+
+.calendar__wrapper{
+    text-align: center;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+.calendar__form{
+    display: flex;
+    justify-content: space-between;
+}
+.previous-month__button, .next-month__button{
+    color: rgba(115, 115, 115, 1);
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.date__item span{
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.list__table{
+    table-layout: fixed;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    margin: 30px auto;
+}
+.table__item{
+    border-bottom: 2px solid rgba(225, 225, 225, 1);
+}
+.table__item:last-child{
+    border-bottom: none;
+}
+.table__item td, .table__item th{
+    text-align: center;
+    color: rgba(115, 115, 115, 1);
+    padding: 10px 10px;
+}
+.table__item td form button{
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
