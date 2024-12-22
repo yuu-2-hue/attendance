@@ -8,12 +8,12 @@ class AttendanceController extends Controller
 {
     public function attendance()
     {
-        return view('attendance');
+        return view('user.attendance');
     }
 
     public function list()
     {
-        return view('attendance-list');
+        return view('user.attendance-list');
     }
 
     public function request(Request $request)
@@ -21,11 +21,11 @@ class AttendanceController extends Controller
         $tab = $request->query('tab');
         if($tab == null) $tab = 'unfinished';
 
-        return view('attendance-request', compact('tab'));
+        return view('user.attendance-request', compact('tab'));
     }
 
     public function detail()
     {
-        return view('attendance-detail');
+        return view('user.attendance-detail');
     }
 }

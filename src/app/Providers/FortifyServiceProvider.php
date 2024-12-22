@@ -47,20 +47,6 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.register');
         });
 
-        Fortify::authenticateUsing(function (LoginRequest $request) {
-            $credentials = $request->only('email', 'password');
-
-            if (auth()->attempt($credentials)) {
-                return auth()->user();
-            }
-
-            return null;
-        });
-
-        Fortify::loginView(function () {
-            return view('auth.login');
-        });
-
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;
 
