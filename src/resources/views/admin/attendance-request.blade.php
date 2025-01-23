@@ -13,8 +13,8 @@
             <button name="tab" value="finished" @class(['tab--bold' => $tab=="finished", 'tab--black' => $tab=="unfinished",])>承認済み</button>
         </form>
     </div>
-    <div class="list__wrapper">
-        <table class="list__table">
+    <div class="request-list__wrapper">
+        <table class="request-list__table">
             <tr class="table__item">
                 <th class="state">状態</th>
                 <th class="name">名前</th>
@@ -23,22 +23,18 @@
                 <th class="request-date">申請日時</th>
                 <th class="detail">詳細</th>
             </tr>
+            @foreach($lists as $list)
             <tr class="table__item">
-                <td class="state">承認待ち</td>
-                <td class="name">西玲奈</td>
-                <td class="target-date">2024/12/16</td>
-                <td class="reason">遅延のため</td>
-                <td class="request-date">2024/12/16</td>
-                <td class="detail"><a href="">詳細</a></td>
+                <td class="state">{{ $list['status'] }}</td>
+                <td class="name">{{ $list['name'] }}</td>
+                <td class="target-date">{{ $list['target_date'] }}</td>
+                <td class="reason">{{ $list['reason'] }}</td>
+                <td class="request-date">{{ $list['request_date'] }}</td>
+                <td class="detail">
+                    <a href="/admin/stamp_correction_request/approve/{{ $list['work_time_id'] }}">詳細</a>
+                </td>
             </tr>
-            <tr class="table__item">
-                <td class="state">承認待ち</td>
-                <td class="name">西玲奈</td>
-                <td class="target-date">2024/12/16</td>
-                <td class="reason">遅延のため</td>
-                <td class="request-date">2024/12/16</td>
-                <td class="detail"><a href="">詳細</a></td>
-            </tr>
+            @endforeach
         </table>
     </div>
 </div>

@@ -17,11 +17,9 @@ class AdminAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        // 'admin'ガードで認証されているか確認
         if (!Auth::guard('admin')->check()) {
-            return redirect('/admin/login'); // 認証されていない場合は管理者用ログインページへリダイレクト
+            return redirect('/admin/login');
         }
-
         return $next($request);
     }
 }

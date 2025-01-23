@@ -27,12 +27,12 @@
                         <a class="header-nav__link" href="/admin/stamp_correction_request/list">申請一覧</a>
                     </li>
                     <li class="header-nav__item">
-                        @if (Auth::check())
-                            <form action="/logout" method="post">
+                        @if (Auth::guard('admin')->check())
+                            <form action="/admin/logout" method="post">
                             @csrf
                                 <button class="header-nav__button">ログアウト</button>
                             </form>
-                        @elseif(!Auth::check())
+                        @elseif(!Auth::guard('admin')->check())
                             <a class="header-nav__link" href="/login">ログイン</a>
                         @endif
                     </li>

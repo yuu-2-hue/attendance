@@ -31,28 +31,42 @@
     border-bottom: none;
 }
 
-.name__ttl, .date__ttl, .work__ttl, .rest__ttl, .remarks__ttl {
+.name__ttl,
+.date__ttl,
+.work__ttl,
+.rest__ttl,
+.remarks__ttl {
     width: 40%;
+    color: rgba(115, 115, 115, 1);
     padding-block: 25px;
     padding-left: 100px;
 }
 
-.name, .date, .work-time, .rest-time, .remarks {
+.name,
+.date,
+.work-time,
+.rest-time,
+.remarks {
     padding-block: 25px;
     padding-right: 100px;
 }
-.input__first, .input__second{
+
+.input__first,
+.input__second {
     width: 100px;
     height: 30px;
     text-align: center;
 }
-.input__first{
+
+.input__first {
     margin-right: 30px;
 }
-.input__second{
+
+.input__second {
     margin-left: 30px;
 }
-.date .input__second{
+
+.date .input__second {
     margin-left: 50px;
 }
 
@@ -60,6 +74,11 @@
     width: 316px;
     height: 72px;
     padding: 5px;
+}
+
+.no-retouch__text {
+    text-align: right;
+    color: red;
 }
 
 .retouch__button {
@@ -75,4 +94,136 @@
     box-shadow: none;
     margin-left: auto;
     margin-top: 30px;
+}
+
+.form__error{
+    color: red;
+}
+
+@media screen and (max-width: 1200px) {
+    .attendance-detail__container {
+        max-width: 768px;
+    }
+
+    .name__ttl,
+    .date__ttl,
+    .work__ttl,
+    .rest__ttl,
+    .remarks__ttl {
+        padding-block: 25px;
+        padding-left: 50px;
+    }
+
+    .name,
+    .date,
+    .work-time,
+    .rest-time,
+    .remarks {
+        padding-block: 25px;
+        padding-right: 50px;
+    }
+
+    .input__first {
+        margin-right: 15px;
+    }
+
+    .input__second {
+        margin-left: 15px;
+    }
+
+    .date .input__second {
+        margin-left: 35px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .attendance-detail__container {
+        max-width: 460px;
+    }
+
+    .attendance-detail__ttl {
+        font-size: 1.4rem;
+    }
+
+    .name__ttl,
+    .date__ttl,
+    .work__ttl,
+    .rest__ttl,
+    .remarks__ttl {
+        padding-left: 30px;
+    }
+
+    .name,
+    .date,
+    .work-time,
+    .rest-time,
+    .remarks {
+        padding-right: 15px;
+    }
+
+    .input__first,
+    .input__second {
+        width: 80px;
+    }
+
+    .input__first {
+        margin-right: 7px;
+    }
+
+    .input__second {
+        margin-left: 7px;
+    }
+
+    .date .input__second {
+        margin-left: 26px;
+    }
+
+    .remarks textarea {
+        width: 216px;
+        height: 72px;
+        padding: 5px;
+    }
+
+    .no-retouch__text {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .attendance-detail__container {
+        max-width: 360px;
+    }
+
+    .attendance-detail__ttl {
+        font-size: 1.2rem;
+    }
+
+    .name__ttl,
+    .date__ttl,
+    .work__ttl,
+    .rest__ttl,
+    .remarks__ttl {
+        padding-left: 25px;
+    }
+
+    .input__first,
+    .input__second {
+        width: 75px;
+    }
+
+    .input__first {
+        margin-right: 7px;
+    }
+
+    .input__second {
+        margin-left: 7px;
+    }
+
+    .date .input__second {
+        margin-left: 30px;
+    }
+
+    .remarks textarea {
+        width: 180px;
+    }
 }

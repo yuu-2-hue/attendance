@@ -3,24 +3,15 @@
 namespace App\Providers;
 
 use App\Actions\Fortify\CreateNewUser;
-use App\Actions\Fortify\ResetUserPassword;
-use App\Actions\Fortify\UpdateUserPassword;
-use App\Actions\Fortify\UpdateUserProfileInformation;
-use App\Actions\CustomUserCreator;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LogoutResponse;
-
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\LoginRequest;
-use App\Models\User;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -32,6 +23,13 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
         public function toResponse($request)
         {
+            $guard = Auth::getDefaultDriver();
+            if ($guard == 'admin') {
+                Auth::guard('admin')->logout();
+                return redirect('/admin/login');
+            }
+
+            Auth::guard('web')->logout();
             return redirect('/login');
         }});
     }
@@ -45,6 +43,10 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::registerView(function () {
             return view('auth.register');
+        });
+
+        Fortify::verifyEmailView(function(){
+            return view('auth.verify');
         });
 
         RateLimiter::for('login', function (Request $request) {

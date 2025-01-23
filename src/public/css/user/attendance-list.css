@@ -27,9 +27,18 @@
     outline: none;
     box-shadow: none;
 }
-.date__item span{
+.date__item {
+    position: relative;
+}
+.date__item span {
     font-weight: bold;
     vertical-align: middle;
+}
+.date__item img {
+    position: absolute;
+    left: -25px;
+    width: 20px;
+    height: 20px;
 }
 
 .list__table{
@@ -50,9 +59,69 @@
     color: rgba(115, 115, 115, 1);
     padding: 10px 10px;
 }
+.detail a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 1);
+}
 .table__item td form button{
     background: transparent;
     border: none;
     outline: none;
     box-shadow: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .attendance-list__container {
+        max-width: 768px;
+    }
+
+    .table__item td, .table__item th {
+        padding: 10px 0px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .attendance-list__container {
+        max-width: 480px;
+    }
+
+    .attendance-list__ttl {
+        font-size: 1.4rem;
+    }
+
+    .date__item span {
+        font-size: 0.8rem;
+    }
+
+    .date__item img {
+        left: -20px;
+        top: 2px;
+        width: 17px;
+        height: 17px;
+    }
+
+    .list__table {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .attendance-list__container {
+        max-width: 360px;
+    }
+
+    .attendance-list__ttl {
+        font-size: 1.2rem;
+    }
+
+    .date__item img {
+        left: -20px;
+        top: 2px;
+        width: 17px;
+        height: 17px;
+    }
+
+    .list__table {
+        font-size: 0.57rem;
+    }
 }

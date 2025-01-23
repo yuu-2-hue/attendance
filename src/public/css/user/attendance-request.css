@@ -29,7 +29,7 @@
     font-weight: none;
 }
 
-.list__table {
+.request-list__table {
     table-layout: fixed;
     width: 100%;
     background-color: rgba(255, 255, 255, 1);
@@ -45,16 +45,79 @@
     border-bottom: none;
 }
 
-.table__item td,
-.table__item th {
+.table__item td, .table__item th {
     text-align: center;
     color: rgba(115, 115, 115, 1);
     padding: 10px 10px;
 }
-
+.detail a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 1);
+}
 .table__item td form button {
     background: transparent;
     border: none;
     outline: none;
     box-shadow: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .attendance-request__container {
+        max-width: 768px;
+    }
+
+    .tab__wrapper {
+        padding: 10px 20px;
+    }
+    .tab__form button {
+        padding: 5px 30px;
+    }
+
+    .table__item td, .table__item th {
+        padding: 10px 0px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .attendance-request__container {
+        max-width: 480px;
+    }
+
+    .attendance-request__ttl {
+        font-size: 1.4rem;
+    }
+
+    .tab__wrapper {
+        padding: 10px 10px;
+    }
+    .tab__form button {
+        font-size: 0.8rem;
+        padding: 5px 20px;
+    }
+
+    .request-list__table {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .attendance-request__container {
+        max-width: 360px;
+    }
+
+    .attendance-request__ttl {
+        font-size: 1.2rem;
+    }
+
+    .tab__wrapper {
+        padding: 10px 10px;
+    }
+    .tab__form button {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+
+    .request-list__table {
+        font-size: 0.57rem;
+    }
 }

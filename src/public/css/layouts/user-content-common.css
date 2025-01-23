@@ -52,7 +52,6 @@ body {
     box-shadow: none;
     margin-left: 43px;
 }
-
 @media screen and (max-width: 1200px) {
     .header__logo img {
         width: 300px;
@@ -75,8 +74,23 @@ body {
     .header-nav {
         justify-content: center;
     }
+
     .header-nav__link {
         margin-inline: 20px;
+    }
+    .header-nav__button {
+        margin-left: 5px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .header-nav__link {
+        font-size: 0.8rem;
+    }
+
+    .header-nav__button {
+        font-size: 0.8rem;
+        margin-left: 5px;
     }
 }
 
@@ -92,7 +106,6 @@ body {
     }
 
     .header-nav__link {
-        font-size: 1rem;
         margin-inline: 10px;
     }
 }

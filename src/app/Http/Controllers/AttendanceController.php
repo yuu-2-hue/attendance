@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
-use App\Models\Attendance;
+use App\Models\WorkTime;
+use App\Models\RestTime;
 
 class AttendanceController extends Controller
 {
     public function attendance()
     {
-        $todayAttendanceData = Attendance::GetTodayAttendance();
+        $today = Carbon::today()->format('Y-m-d');
+        $yesterday = Carbon::yesterday()->format('Y-m-d');
+        $todayAttendanceData = WorkTime::GetTodayAttendance($yesterday, $today);
 
         $status = '勤務外';
         if(isset($todayAttendanceData->user_id) == true)
@@ -23,82 +26,70 @@ class AttendanceController extends Controller
         return view('user.attendance', compact('status'));
     }
 
-    public function list()
-    {
-        return view('user.attendance-list');
-    }
-
-    public function request(Request $request)
-    {
-        $tab = $request->query('tab');
-        if($tab == null) $tab = 'unfinished';
-
-        return view('user.attendance-request', compact('tab'));
-    }
-
-    public function detail()
-    {
-        return view('user.attendance-detail');
-    }
-
     public function store(Request $request)
     {
+        $today = Carbon::today()->format('Y-m-d');
+        $yesterday = Carbon::yesterday()->format('Y-m-d');
+        $todayAttendanceData = WorkTime::GetTodayAttendance($yesterday, $today);
+
         // 現在の時間を文字列に変換
         $date = $request->year.'-'.$request->month.'-'.$request->day;
-        $time = $request->hour.':'.$request->min;
+        $time = $request->hour.':'.$request->min.':'.$request->sec;
 
         if($request->has('at_work'))
         {
-            Attendance::create([
+            WorkTime::create([
                 'user_id' => Auth::id(),
                 'status' => '勤務中',
-                'date' => $date,
+                'at_work_date' => $date,
                 'at_work_time' => $time,
-                'finish_work_time' => $time,
-                'at_rest_time' => $time,
-                'finish_rest_time' => $time,
-                'total_time' => '08:00',
             ]);
         }
         else if($request->has('finish_work'))
         {
-            $todayAttendanceData = Attendance::GetTodayAttendance();
-
             // 働いている時間
-            $startDate = new Carbon($todayAttendanceData->date.' '.$todayAttendanceData->at_work_time);
-            $endDate = new Carbon($request->year.'-'.$request->month.'-'.$request->day.' '.$request->hour.':'.$request->min);
-            // 休憩時間
-            $startRestTime = new Carbon($todayAttendanceData->date.' '.$todayAttendanceData->at_rest_time);
-            $endRestTime = new Carbon($todayAttendanceData->date.' '.$todayAttendanceData->finish_rest_time);
+            $startDate = new Carbon($todayAttendanceData->at_work_date.' '.substr($todayAttendanceData->at_work_time, 0, 5));
+            $finishDate = new Carbon($request->year.'-'.$request->month.'-'.$request->day.' '.$request->hour.':'.$request->min);
 
-            // 働いている合計時間を計算
-            $workSecond = $startDate->diffInSeconds($endDate);
-            $restSecond = $startRestTime->diffInSeconds($endRestTime);
-            $totalSecond = $workSecond - $restSecond;
+            $totalTime = WorkTime::GetWorkTime($startDate, $finishDate);
 
-            // 変換
-            $workHour = floor($totalSecond / 3600);
-            $workMinute = floor(($totalSecond % 3600) / 60);
-            $totalTime = $workHour.':'.$workMinute;
-
-            Attendance::GetTodayAttendance()->update([
+            $todayAttendanceData->update([
                 'status' => '退勤済',
+                'finish_work_date' => $date,
                 'finish_work_time' => $time,
-                'total_time' => $totalTime,
+                'total_work_time' => $totalTime,
             ]);
         }
         else if($request->has('at_rest'))
         {
-            Attendance::GetTodayAttendance()->update([
+            $todayAttendanceData->update([
                 'status' => '休憩中',
+            ]);
+
+            RestTime::create([
+                'status' => '休憩中',
+                'work_time_id' => $todayAttendanceData->id,
+                'at_rest_date' => $date,
                 'at_rest_time' => $time,
             ]);
         }
         else if($request->has('finish_rest'))
         {
-            Attendance::GetTodayAttendance()->update([
+            $restTime = RestTime::GetRestTime($todayAttendanceData->id);
+
+            $todayAttendanceData->update([
                 'status' => '勤務中',
+            ]);
+
+            $startRestDate = $restTime->at_rest_date.' '.substr($restTime->at_rest_time, 0, 5);
+            $finishRestDate = $date.' '.substr($time, 0, 5);
+            $totalRestTime = RestTime::CalculationTotalRestTime($startRestDate, $finishRestDate);
+
+            $restTime->update([
+                'status' => '休憩終了',
+                'finish_rest_date' => $date,
                 'finish_rest_time' => $time,
+                'total_rest_time' => $totalRestTime,
             ]);
         }
 

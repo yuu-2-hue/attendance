@@ -1,7 +1,7 @@
 @extends('layouts/auth-app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
+<link rel="stylesheet" href="{{ asset('css/auth/admin-login.css') }}">
 @endsection
 
 @section('content')
@@ -28,8 +28,7 @@
             </div>
         </div>
         <div class="button__item">
-            <button class="item__button" type="submit">ログインする</button>
-            <a class="item__link" href="/register">会員登録はこちら</a>
+            <button class="item__button" type="submit">管理者ログインする</button>
         </div>
     </form>
 </div>

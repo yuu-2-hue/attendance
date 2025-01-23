@@ -1,9 +1,9 @@
-.attendance-list__container {
+.staff-list__container {
     max-width: 900px;
     margin: 0 auto;
 }
 
-.attendance-list__ttl {
+.staff-list__ttl {
     font-size: 1.8rem;
     font-weight: bold;
     border-left: 10px solid rgba(0, 0, 0, 1);
@@ -11,7 +11,7 @@
     margin: 50px 0;
 }
 
-.list__table {
+.staff-list__table {
     table-layout: fixed;
     width: 100%;
     background-color: rgba(255, 255, 255, 1);
@@ -27,8 +27,7 @@
     border-bottom: none;
 }
 
-.table__item td,
-.table__item th {
+.table__item td, .table__item th {
     text-align: center;
     color: rgba(115, 115, 115, 1);
     padding: 10px 10px;
@@ -37,4 +36,43 @@
 .monthly-attendance a {
     text-decoration: none;
     color: rgba(0, 0, 0, 1);
+}
+
+@media screen and (max-width: 1200px) {
+    .staff-list__container {
+        max-width: 768px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .staff-list__container {
+        max-width: 470px;
+    }
+    .staff-list__ttl {
+        font-size: 1.4rem;
+    }
+
+    .staff-list__table {
+        font-size: 0.8rem;
+    }
+    .table__item td, .table__item th {
+        font-size: 0.7rem;
+        padding: 10px 0px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .staff-list__container {
+        max-width: 360px;
+    }
+    .staff-list__ttl {
+        font-size: 1.2rem;
+    }
+
+    .staff-list__table {
+        font-size: 0.57rem;
+    }
+    .table__item td, .table__item th {
+        font-size: 0.6rem;
+    }
 }

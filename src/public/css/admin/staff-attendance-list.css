@@ -1,9 +1,9 @@
-.attendance-list__container {
+.staff-attendance-list__container {
     max-width: 900px;
     margin: 0 auto;
 }
 
-.attendance-list__ttl {
+.staff-attendance-list__ttl {
     font-size: 1.8rem;
     font-weight: bold;
     border-left: 10px solid rgba(0, 0, 0, 1);
@@ -41,7 +41,7 @@
 
 .date__item span {
     font-weight: bold;
-    vertical-align: text-top;
+    vertical-align: middle;
 }
 
 .date__item img {
@@ -51,7 +51,7 @@
     height: 20px;
 }
 
-.list__table {
+.staff-attendance-list__table {
     table-layout: fixed;
     width: 100%;
     background-color: rgba(255, 255, 255, 1);
@@ -67,8 +67,7 @@
     border-bottom: none;
 }
 
-.table__item td,
-.table__item th {
+.table__item td, .table__item th {
     text-align: center;
     color: rgba(115, 115, 115, 1);
     padding: 10px 10px;
@@ -77,4 +76,85 @@
 .detail a {
     text-decoration: none;
     color: rgba(0, 0, 0, 1);
+}
+
+.export__btn{
+    display: block;
+    width: 130px;
+    height: 40px;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 1);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: none;
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+@media screen and (max-width: 1200px) {
+    .staff-attendance-list__container {
+        max-width: 768px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .staff-attendance-list__container {
+        max-width: 480px;
+    }
+
+    .staff-attendance-list__ttl {
+        font-size: 1.4rem;
+    }
+
+    .date__item span {
+        font-size: 0.8rem;
+    }
+
+    .date__item img {
+        left: -20px;
+        top: 2px;
+        width: 17px;
+        height: 17px;
+    }
+
+    .table__item td, .table__item th {
+        font-size: 0.8rem;
+        padding: 10px 5px;
+    }
+
+    .export__btn {
+        width: 100px;
+        height: 30px;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .staff-attendance-list__container {
+        max-width: 360px;
+    }
+
+    .staff-attendance-list__ttl {
+        font-size: 1.2rem;
+    }
+
+    .date__item img {
+        left: -20px;
+        top: 2px;
+        width: 17px;
+        height: 17px;
+    }
+
+    .table__item td, .table__item th {
+        font-size: 0.7rem;
+        padding: 10px 0px;
+    }
+
+    .export__btn {
+        width: 80px;
+        height: 25px;
+        font-size: 0.8rem;
+    }
 }

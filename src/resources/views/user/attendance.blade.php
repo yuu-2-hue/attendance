@@ -23,6 +23,7 @@
             <span class="item__time" id="time"></span>
             <input class="item__time" id="hour" name="hour" value="" readonly hidden>
             <input class="item__time" id="min" name="min" value="" readonly hidden>
+            <input class="item__time" id="sec" name="sec" value="" readonly hidden>
         </div>
         @if($status == '勤務外')
             <button class="at-work__button" name="at_work" type="submit">出勤</button>
@@ -55,8 +56,10 @@
         var date = new Date();
         var hour = date.getHours().toString().padStart(2, "0");
         var min = date.getMinutes().toString().padStart(2, "0");
+        var sec = date.getSeconds().toString().padStart(2, "0");
         document.getElementById("hour").value = hour;
         document.getElementById("min").value = min;
+        document.getElementById("sec").value = sec;
         document.getElementById("time").innerHTML = hour + ":" + min;
     }
 

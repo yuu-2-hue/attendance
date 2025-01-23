@@ -2,9 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Models\User;
+use App\Http\Controllers\AdminListController;
+use App\Http\Controllers\AdminDetailController;
+use App\Http\Controllers\AdminStaffController;
+use App\Http\Controllers\AdminRequestController;
+
 use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserListController;
+use App\Http\Controllers\UserDetailController;
+use App\Http\Controllers\UserRequestController;
 
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -33,20 +39,34 @@ Route::middleware('guest:admin')->group(function (){
 // 管理者用ログアウト処理
 Route::post('/admin/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth:admin')->name('admin.logout');
 
-Route::middleware('auth.admin')->group(function (){
-    Route::get('attendance/list', [AdminController::class, 'attendanceList'])->name('admin.list');
-    Route::get('attendance/{id}', [AdminController::class, 'detail'])->name('admin.detail');
-    Route::get('stamp_correction_request/list', [AdminController::class, 'request'])->name('admin.request');
-    Route::get('staff/list', [AdminController::class, 'staffList'])->name('admin.staff-list');
-    Route::get('attendance/staff/{id}', [AdminController::class, 'staffAttendanceList'])->name('admin.staff-attendance-list');
-    Route::get('stamp_correction_request/approve/{attendance_correct_request}', [AdminController::class, 'approve'])->name('admin.approve');
+// 管理者用
+Route::middleware('auth.admin')->prefix('admin')->group(function (){
+    Route::get('/attendance/list', [AdminListController::class, 'attendanceList'])->name('admin.list');
+    Route::post('/attendance/list/change_day', [AdminListController::class, 'changeDay']);
+
+    Route::get('/attendance/{id}', [AdminDetailController::class, 'detail'])->name('admin.detail');
+    Route::post('/attendance/{id}/retouch', [AdminDetailController::class, 'retouch']);
+
+    Route::get('/staff/list', [AdminStaffController::class, 'staffList'])->name('admin.staff-list');
+    Route::get('/attendance/staff/{id}', [AdminStaffController::class, 'staffAttendanceList'])->name('admin.staff-attendance-list');
+    Route::get('/attendance/staff/{id}/changeMonth', [AdminStaffController::class, 'changeMonth']);
+    Route::post('/export', [AdminStaffController::class, 'export']);
+
+    Route::get('/stamp_correction_request/list', [AdminRequestController::class, 'request'])->name('admin.request');
+    Route::get('/stamp_correction_request/approve/{attendance_correct_request}', [AdminRequestController::class, 'approve'])->name('admin.approve');
+    Route::post('/stamp_correction_request/approve/{attendance_correct_request}', [AdminRequestController::class, 'update']);
 });
 
-Route::middleware('auth')->group(function () {
+// 一般ユーザー用
+Route::middleware('verified')->group(function () {
     Route::get('/attendance', [AttendanceController::class, 'attendance'])->name('user.attendance');
     Route::post('/attendance/store', [AttendanceController::class, 'store']);
 
-    Route::get('/attendance/list', [AttendanceController::class, 'list'])->name('user.list');
-    Route::get('/attendance/{id}', [AttendanceController::class, 'detail'])->name('user.detail');
-    Route::get('/stamp_correction_request/list', [AttendanceController::class, 'request'])->name('user.request');
+    Route::get('/attendance/list', [UserListController::class, 'list'])->name('user.list');
+    Route::get('/attendance/list/change_month', [UserListController::class, 'changeMonth']);
+
+    Route::get('/attendance/{id}', [UserDetailController::class, 'detail'])->name('user.detail');
+    Route::post('/attendance/{id}/retouch', [UserDetailController::class, 'retouch']);
+
+    Route::get('/stamp_correction_request/list', [UserRequestController::class, 'request'])->name('user.request');
 });

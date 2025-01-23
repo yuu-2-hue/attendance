@@ -36,7 +36,7 @@
 }
 .date__item span{
     font-weight: bold;
-    vertical-align: text-top;
+    vertical-align: middle;
 }
 .date__item img {
     position: absolute;
@@ -66,4 +66,55 @@
 .detail a {
     text-decoration: none;
     color: rgba(0, 0, 0, 1);
+}
+
+@media screen and (max-width: 1200px) {
+    .attendance-list__container {
+        max-width: 768px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .attendance-list__container {
+        max-width: 480px;
+    }
+
+    .attendance-list__ttl {
+        font-size: 1.4rem;
+    }
+
+    .date__item span {
+        font-size: 0.8rem;
+    }
+    .date__item img {
+        left: -20px;
+        top: 2px;
+        width: 17px;
+        height: 17px;
+    }
+
+    .list__table {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .attendance-list__container {
+        max-width: 360px;
+    }
+
+    .attendance-list__ttl {
+        font-size: 1.2rem;
+    }
+
+    .date__item img {
+        left: -20px;
+        top: 2px;
+        width: 17px;
+        height: 17px;
+    }
+
+    .list__table {
+        font-size: 0.57rem;
+    }
 }
