@@ -63,10 +63,6 @@ php artisan migrate
 ``` bash
 php artisan db:seed
 ```
-11. シンボリックリンク作成
-``` bash
-php artisan storage:link
-```
 
 ### 管理者ログイン
 管理者でログインする場合は下記内容でログインしてください
