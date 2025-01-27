@@ -37,7 +37,7 @@ Route::middleware('guest:admin')->group(function (){
     Route::post('/admin/login', [AuthenticatedSessionController::class, 'store'])->name('admin.login');
 });
 // 管理者用ログアウト処理
-Route::post('/admin/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth:admin')->name('admin.logout');
+Route::post('/admin/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth.admin')->name('admin.logout');
 
 // 管理者用
 Route::middleware('auth.admin')->prefix('admin')->group(function (){

@@ -21,17 +21,21 @@ class FortifyServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
-        public function toResponse($request)
-        {
-            $guard = Auth::getDefaultDriver();
-            if ($guard == 'admin') {
-                Auth::guard('admin')->logout();
-                return redirect('/admin/login');
-            }
+            public function toResponse($request)
+            {
+                $guard = 'web';
+                if(Auth::guard('admin')->check()) $guard = 'admin';
 
-            Auth::guard('web')->logout();
-            return redirect('/login');
-        }});
+                Auth::guard($guard)->logout();
+
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                if($guard === 'admin') return redirect('/admin/login');
+
+                return redirect('/login');
+            }
+        });
     }
 
     /**
